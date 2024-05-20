@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import Category from "../category/Category.jsx";
 
 async function getCategories(){
     const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -16,7 +17,7 @@ function CategoryList(){
 
     return (
         <div>
-            {categoryName.map(cn => <div key={cn.id}>{cn.name}</div>)}
+            {categoryName.map(cn => <Category key={cn.id} name={cn.name}/>)}
         </div>
     )
 }
