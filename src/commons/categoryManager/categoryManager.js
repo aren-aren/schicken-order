@@ -1,9 +1,18 @@
 import axios from "axios";
 
+
+
 export const categoryManager = {
-    category : 0,
+    category : null,
     moveCategory : moveCategory,
-    setMenuList : ()=>{}
+    setMenuList : ()=>{},
+    setCategory : null,
+    init : init
+}
+
+function init([category, setCategory]){
+    categoryManager.category = category;
+    categoryManager.setCategory = setCategory;
 }
 
 async function moveCategory(id){
@@ -11,7 +20,7 @@ async function moveCategory(id){
     const subPath = id === 0 ? "menus" : "menus/category/" + id;
 
     const res = await axios.get(baseUrl + subPath);
-    categoryManager.category = id;
+    categoryManager.setCategory(id);
     renderMenus(res.data);
 }
 
