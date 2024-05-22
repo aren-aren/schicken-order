@@ -1,10 +1,10 @@
-import CategoryList from "./commons/components/categoryList/CategoryList.jsx";
-import MenuList from "./pages/menus/MenuList.jsx";
-import {categoryManager} from "./commons/categoryManager/categoryManager.js";
+import CategoryList from "./pages/order/components/CategoryList.jsx";
+import MenuList from "./pages/order/components/MenuList.jsx";
+import {categoryManager} from "./pages/order/categoryManager/categoryManager.js";
 import {useState} from "react";
 
 function App() {
-    categoryManager.init.setCategoryState(useState(0));
+    categoryManager.init.setCategoryState(useState(""));
     categoryManager.init.setMenuState(useState([]));
 
     return (

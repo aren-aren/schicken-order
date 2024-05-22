@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const categoryManager = {
-    isNowCategory : id => id === categoryState.category,
     moveCategory : moveCategory,
     init : {
         setCategoryState,

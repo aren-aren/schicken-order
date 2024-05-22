@@ -1,4 +1,4 @@
-import {categoryManager} from "../../commons/categoryManager/categoryManager.js";
+import {categoryManager} from "../categoryManager/categoryManager.js";
 
 function MenuList(){
 
