@@ -1,29 +1,41 @@
 import axios from "axios";
 
-
-
 export const categoryManager = {
-    category : null,
+    isNowCategory : id => id === categoryState.category,
     moveCategory : moveCategory,
-    setMenuList : ()=>{},
-    setCategory : null,
-    init : init
+    init : {
+        setCategoryState,
+        setMenuState,
+    },
+    getCategory : ()=>categoryState.category,
+    getMenus : ()=>menuState.menus
 }
 
-function init([category, setCategory]){
-    categoryManager.category = category;
-    categoryManager.setCategory = setCategory;
+const categoryState = {};
+const menuState = {};
+
+function setCategoryState([category, setCategory]){
+    categoryState.category = category;
+    categoryState.setCategory = setCategory;
 }
 
-async function moveCategory(id){
+function setMenuState([menus, setMenus]){
+    menuState.menus = menus;
+    menuState.setMenus = setMenus;
+}
+
+function moveCategory(id){
     const baseUrl = import.meta.env.VITE_BASE_URL;
-    const subPath = id === 0 ? "menus" : "menus/category/" + id;
+    const subPath = "menus/category/" + id;
 
-    const res = await axios.get(baseUrl + subPath);
-    categoryManager.setCategory(id);
-    renderMenus(res.data);
+    axios.get(baseUrl + subPath)
+        .then(res=>{
+            console.log("getMenus Result : ", res.status);
+            categoryState.setCategory(res.data.id);
+            renderMenus(res.data.menus);
+        });
 }
 
 function renderMenus(menus){
-    categoryManager.setMenuList(menus);
+    menuState.setMenus(menus);
 }

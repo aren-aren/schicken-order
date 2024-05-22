@@ -8,7 +8,7 @@ Category.propTypes={
 
 function Category({id, name}){
 
-    const className = id === categoryManager.category ?
+    const className = categoryManager.isNowCategory(id) ?
         'inline-block text-white align-middle bg-red-700 rounded-md px-3 py-2 m-auto'
         : 'inline-block text-white align-middle hover:bg-red-500 rounded-md px-3 py-2 m-auto'
 

@@ -4,7 +4,8 @@ import {categoryManager} from "./commons/categoryManager/categoryManager.js";
 import {useState} from "react";
 
 function App() {
-    categoryManager.init(useState(0));
+    categoryManager.init.setCategoryState(useState(0));
+    categoryManager.init.setMenuState(useState([]));
 
     return (
         <>
