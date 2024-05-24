@@ -11,15 +11,15 @@ function App() {
         <>
             <BrowserRouter>
                 <Header/>
-                <main className='px-10 py-5 grid justify-center'>
-                        <RecoilRoot>
-                            <Routes>
-                                <Route path="/" element={<OrderPage/>}/>
-                                <Route path="/order" element={<OrderPage/>}/>
-                                <Route path="/history" element={<HistoryPage/>}/>
-                                <Route path="/basket" element={<BasketPage/>}/>
-                            </Routes>
-                        </RecoilRoot>
+                <main className='px-10 grid grid-cols-5 justify-center'>
+                    <RecoilRoot>
+                        <Routes>
+                            <Route path="/" element={<OrderPage/>}/>
+                            <Route path="/order" element={<OrderPage/>}/>
+                            <Route path="/history" element={<HistoryPage/>}/>
+                            <Route path="/basket" element={<BasketPage/>}/>
+                        </Routes>
+                    </RecoilRoot>
                 </main>
             </BrowserRouter>
         </>

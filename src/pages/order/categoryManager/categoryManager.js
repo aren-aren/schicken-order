@@ -33,6 +33,5 @@ function getCategories(){
 
 function getMenusInCategory(id){
     return getAxiosOrCache("menus/category/" + id);
-
 }
 

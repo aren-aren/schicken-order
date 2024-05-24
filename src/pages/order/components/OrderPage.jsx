@@ -15,7 +15,7 @@ function OrderPage(){
     },[])
 
     return (
-        <section className='px-10 pt-5'>
+        <section className='px-10 pt-5 col-start-2 col-span-3 bg-amber-50'>
             <CategoryList/>
             <MenuList/>
         </section>)
