@@ -1,40 +1,38 @@
 import axios from "axios";
 
 export const categoryManager = {
-    moveCategory : moveCategory,
-    init : {
-        setCategoryState,
-        setMenuState,
-    },
-    getCategory : ()=>categoryState.category,
-    getMenus : ()=>menuState.menus
+    getCategories,
+    getMenusInCategory
 }
 
-const categoryState = {};
-const menuState = {};
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const cacheData = {}
 
-function setCategoryState([category, setCategory]){
-    categoryState.category = category;
-    categoryState.setCategory = setCategory;
-}
-
-function setMenuState([menus, setMenus]){
-    menuState.menus = menus;
-    menuState.setMenus = setMenus;
-}
-
-function moveCategory(id){
-    const baseUrl = import.meta.env.VITE_BASE_URL;
-    const subPath = "menus/category/" + id;
-
-    axios.get(baseUrl + subPath)
+function axiosGet(path){
+    return axios.get(baseUrl + path)
         .then(res=>{
-            console.log("getMenus Result : ", res.status);
-            categoryState.setCategory(res.data.id);
-            renderMenus(res.data.menus);
+            if(res.status === 200) return res.data;
+
+            console.log("get error response!!");
+            console.log(res.status, res.statusText, res.data);
+            return null;
         });
 }
 
-function renderMenus(menus){
-    menuState.setMenus(menus);
+function getAxiosOrCache(path){
+    if(cacheData[path] != null) return cacheData[path];
+
+    const data = axiosGet(path);
+    cacheData[path] = data;
+    return data;
 }
+
+function getCategories(){
+    return getAxiosOrCache("categories");
+}
+
+function getMenusInCategory(id){
+    return getAxiosOrCache("menus/category/" + id);
+
+}
+
