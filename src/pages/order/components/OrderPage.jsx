@@ -15,10 +15,10 @@ function OrderPage(){
     },[])
 
     return (
-        <main>
+        <section className='px-10 pt-5'>
             <CategoryList/>
             <MenuList/>
-        </main>)
+        </section>)
 }
 
 export default OrderPage;
