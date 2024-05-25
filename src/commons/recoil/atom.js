@@ -7,7 +7,7 @@ export const categoryState = atom({
 
 export const nowCategoryState = atom({
     key : "nowCategory",
-    default : null
+    default : 0
 })
 
 export const menusInCategoryState = atom({
