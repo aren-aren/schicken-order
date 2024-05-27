@@ -19,7 +19,7 @@ function CategoryList(){
     }
 
     return (
-        <nav className='flex flex-wrap pb-1 border-b-2 border-black gap-3'>
+        <nav className='flex flex-wrap pb-3 border-b-2 border-black gap-3 mb-8'>
             {categories?.map(category =>
                 <div
                     key={category.id}

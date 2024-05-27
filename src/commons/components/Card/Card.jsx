@@ -12,7 +12,7 @@ function Card({title, imgSrc, children}){
 
     return (
         <div
-            className="lg:max-w-sm flex lg:block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            className="lg:max-w-sm flex lg:block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
             <CardImg imgSrc={imgSrc}/>
             <div className="p-5">
                 <CardTitle title={title}/>
