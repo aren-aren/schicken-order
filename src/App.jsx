@@ -11,7 +11,7 @@ function App() {
         <>
             <BrowserRouter>
                 <Header/>
-                <main className='px-10 grid grid-cols-5 justify-center'>
+                <main className='px-0 md:px-10 md:grid md:grid-cols-7 md:justify-center'>
                     <RecoilRoot>
                         <Routes>
                             <Route path="/" element={<OrderPage/>}/>
