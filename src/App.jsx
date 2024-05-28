@@ -4,6 +4,7 @@ import Header from "./commons/layout/Header.jsx";
 import HistoryPage from "./pages/history/components/HistoryPage.jsx";
 import BasketPage from "./pages/basket/components/BasketPage.jsx";
 import {RecoilRoot} from "recoil";
+import ManagementPage from "./pages/management/components/ManagementPage.jsx";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                             <Route path="/order" element={<OrderPage/>}/>
                             <Route path="/history" element={<HistoryPage/>}/>
                             <Route path="/basket" element={<BasketPage/>}/>
+                            <Route path="/manage" element={<ManagementPage/>}/>
                         </Routes>
                     </RecoilRoot>
                 </main>
