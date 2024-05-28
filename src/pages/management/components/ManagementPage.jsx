@@ -13,10 +13,10 @@ function ManagementPage() {
     }, []);
 
     return (
-        <section>
+        <>
             <button>메뉴 추가</button>
             <List items={menus.menus}/>
-        </section>
+        </>
     )
 }
 
