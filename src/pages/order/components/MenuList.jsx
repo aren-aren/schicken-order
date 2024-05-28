@@ -1,16 +1,16 @@
-import {useRecoilState} from "recoil";
-import {menusInCategoryState} from "../../../commons/recoil/atom.js";
+import {useRecoilValue} from "recoil";
 import Card from "../../../commons/components/Card/Card.jsx";
+import {formattedMenusState} from "../../../commons/recoil/atom.js";
 
 function MenuList() {
 
-    const [menusInCategory] = useRecoilState(menusInCategoryState);
+    const menusInCategory = useRecoilValue(formattedMenusState);
 
     return (
         <section className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-5 pb-12">
-            {menusInCategory.menus?.map(menu => (
+            {menusInCategory?.map(menu => (
                     <Card key={menu.id} title={menu.menu}>
-                        <div>{menu.price}</div>
+                        <div>{menu.price} 원</div>
                     </Card>
                 )
             )}

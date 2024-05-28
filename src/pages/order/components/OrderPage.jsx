@@ -1,21 +1,21 @@
 import CategoryList from "./CategoryList.jsx";
 import MenuList from "./MenuList.jsx";
 import {useRecoilState} from "recoil";
-import {categoryState, menusInCategoryState, nowCategoryState} from "../../../commons/recoil/atom.js";
+import {categoryState, formattedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
 import {useEffect} from "react";
 import {categoryManager} from "../categoryManager/categoryManager.js";
 
 function OrderPage(){
     const [, setCategory] = useRecoilState(categoryState);
     const [nowCategory] = useRecoilState(nowCategoryState);
-    const [, setMenusIncategory] = useRecoilState(menusInCategoryState);
+    const [, setMenus] = useRecoilState(formattedMenusState);
 
     useEffect(()=>{
         categoryManager.getCategories().then(data =>{
             setCategory(data);
         })
         categoryManager.getMenusInCategory(nowCategory).then(data => {
-            setMenusIncategory(data);
+            setMenus(data);
         })
     },[])
 
