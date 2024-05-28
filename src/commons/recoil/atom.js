@@ -50,7 +50,7 @@ export const formatedModalDataState = selector({
 /* utils */
 
 function moneyFormat(target){
-    const money = (target + "").replace(/[^0-9]/g,"");
+    const money = target + "";
     let formatted = [];
     for (let i = 0; i < money.length; i++) {
         formatted.push(money.at(money.length - i - 1));
@@ -62,5 +62,5 @@ function moneyFormat(target){
 }
 
 function formatToNumber(target){
-    return target.toString().replace(/,/g, "");
+    return Number(target.toString().replace(/[^0-9]/g, ""));
 }
