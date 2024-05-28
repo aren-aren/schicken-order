@@ -1,11 +1,11 @@
 import {useRecoilState} from "recoil";
-import {categoryState, formattedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
+import {categoryState, formatedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
 import {categoryManager} from "../categoryManager/categoryManager.js";
 
 function CategoryList(){
     const [categories] = useRecoilState(categoryState);
     const [nowCategory, setNowCategory] = useRecoilState(nowCategoryState);
-    const [,setMenusInCategory] = useRecoilState(formattedMenusState);
+    const [,setMenusInCategory] = useRecoilState(formatedMenusState);
 
     const getClassName = id => {
         const defaultClassName = "border-b-2 flex-1 min-w-fit ";

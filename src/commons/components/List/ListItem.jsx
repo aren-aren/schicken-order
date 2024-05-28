@@ -2,12 +2,13 @@ import PropTypes from "prop-types";
 
 ListItem.propTypes = {
     menu : PropTypes.string,
-    price : PropTypes.string
+    price : PropTypes.string,
+    onClick : PropTypes.func
 }
 
-function ListItem({menu, price}){
+function ListItem({menu, price, onClick}){
     return (
-        <li className="flex justify-between gap-x-6 p-5 hover:bg-gray-100">
+        <li className="flex justify-between gap-x-6 p-5 hover:bg-gray-100" onClick={onClick}>
             <div className="flex min-w-0 gap-x-4">
                 이미지
                 <div className="min-w-0 flex-auto">

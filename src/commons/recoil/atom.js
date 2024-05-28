@@ -15,8 +15,20 @@ export const menusInCategoryState = atom({
     default : []
 })
 
-export const formattedMenusState = selector({
-    key : "formattedMenus",
+export const modalState = atom({
+    key : "modal",
+    default : false
+})
+
+export const modalDataState = atom({
+    key : "modalData",
+    default : {}
+})
+
+/* selector */
+
+export const formatedMenusState = selector({
+    key : "formatedMenus",
     get : ({get})=>{
         const menus = get(menusInCategoryState);
 
@@ -25,11 +37,20 @@ export const formattedMenusState = selector({
     set : ({set}, newValue) => set(menusInCategoryState, newValue.menus)
 })
 
+export const formatedModalDataState = selector({
+    key : "formated",
+    get : ({get})=>{
+        const menu = get(modalDataState);
+
+        return {...menu,  price : moneyFormat(menu.price)}
+    },
+    set : ({set}, newValue) => set(modalDataState,{...newValue, price : formatToNumber(newValue.price)})
+})
 
 /* utils */
 
-function moneyFormat(number){
-    const money = number + "";
+function moneyFormat(target){
+    const money = (target + "").replace(/[^0-9]/g,"");
     let formatted = [];
     for (let i = 0; i < money.length; i++) {
         formatted.push(money.at(money.length - i - 1));
@@ -38,4 +59,8 @@ function moneyFormat(number){
         }
     }
     return formatted.reverse().join("");
+}
+
+function formatToNumber(target){
+    return target.toString().replace(/,/g, "");
 }

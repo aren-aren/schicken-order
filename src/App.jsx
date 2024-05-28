@@ -7,7 +7,6 @@ import {RecoilRoot} from "recoil";
 import ManagementPage from "./pages/management/components/ManagementPage.jsx";
 
 function App() {
-
     return (
         <>
             <BrowserRouter>
