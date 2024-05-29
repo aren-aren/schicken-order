@@ -3,7 +3,7 @@ import MenuList from "./MenuList.jsx";
 import {useRecoilState} from "recoil";
 import {categoryState, formatedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
 import {useEffect} from "react";
-import {categoryManager} from "../categoryManager/categoryManager.js";
+import {menuManager} from "../menuManager/menuManager.js";
 
 function OrderPage(){
     const [, setCategory] = useRecoilState(categoryState);
@@ -11,10 +11,10 @@ function OrderPage(){
     const [, setMenus] = useRecoilState(formatedMenusState);
 
     useEffect(()=>{
-        categoryManager.getCategories().then(data =>{
+        menuManager.getCategories().then(data =>{
             setCategory(data);
         })
-        categoryManager.getMenusInCategory(nowCategory).then(data => {
+        menuManager.getMenusInCategory(nowCategory).then(data => {
             setMenus(data);
         })
     },[])

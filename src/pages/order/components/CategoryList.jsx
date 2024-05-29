@@ -1,6 +1,6 @@
 import {useRecoilState} from "recoil";
 import {categoryState, formatedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
-import {categoryManager} from "../categoryManager/categoryManager.js";
+import {menuManager} from "../menuManager/menuManager.js";
 
 function CategoryList(){
     const [categories] = useRecoilState(categoryState);
@@ -13,7 +13,7 @@ function CategoryList(){
     }
 
     const onClick = id=>{
-        categoryManager.getMenusInCategory(id)
+        menuManager.getMenusInCategory(id)
             .then(data=>setMenusInCategory(data));
         setNowCategory(id);
     }
