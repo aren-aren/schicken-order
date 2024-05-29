@@ -1,6 +1,7 @@
 import {useRecoilValue} from "recoil";
 import Card from "../../../commons/components/Card/Card.jsx";
 import {formatedMenusState} from "../../../commons/recoil/atom.js";
+import menuDefault from "../../../assets/menuDefault.png";
 
 function MenuList() {
 
@@ -9,7 +10,7 @@ function MenuList() {
     return (
         <section className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-5 pb-12">
             {menusInCategory?.map(menu => (
-                    <Card key={menu.id} title={menu.menu}>
+                    <Card key={menu.id} title={menu.menu} imgSrc={menuDefault}>
                         <div>{menu.price} 원</div>
                     </Card>
                 )

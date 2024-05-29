@@ -16,7 +16,6 @@ const customModalStyles = {
         left: 0,
     },
     content: {
-        width: "calc(40vw)",
         height: "calc(50vh)",
         zIndex: 150,
         position: "absolute",
@@ -52,6 +51,7 @@ function Modal({ children, onRequestClose }){
             onRequestClose={closeModal}
             shouldCloseOnOverlayClick={true}
             appElement={document.getElementById('root')}
+            className="!w-full md:!w-[40vw]"
         >
             <div className="modal-content">
                 {children}

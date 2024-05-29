@@ -5,6 +5,7 @@ import {formatedMenusState, formatedModalDataState, modalDataState, modalState} 
 import List from "../../../commons/components/List/List.jsx";
 import Modal from "../../../commons/components/Modal/Modal.jsx";
 import Button from "../../../commons/components/Button/Button.jsx";
+import menuDefault from "../../../assets/menuDefault.png";
 
 function ManagementPage() {
     const [menus, setMenus] = useRecoilState(formatedMenusState);
@@ -57,6 +58,9 @@ function ManagementPage() {
             <Button onClick={onClickAdd} className="w-full">메뉴 추가</Button>
             <List items={menus} clickEvent={onClickUpdate}/>
             <Modal onRequestClose={()=>isOpenModal(false)}>
+                <div>
+                    <img src={menuDefault} style={{height: "300px"}}/>
+                </div>
                 <div>
                     <label htmlFor={"menuName" + modalData.id}>메뉴 이름 : </label>
                     <input id={"menuName" + modalData.id} type="text" onChange={event => onChange("menu", event.target.value)} value={modalData.menu}/>
