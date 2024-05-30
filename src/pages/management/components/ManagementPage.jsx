@@ -40,6 +40,7 @@ function ManagementPage() {
     }
 
     const submitData = () => {
+
         (async ()=>{
             if(modalData.id === ""){
                 return menuManager.addMenu(readiedModalData)
@@ -53,13 +54,24 @@ function ManagementPage() {
         })
     }
 
+    const onChangeImage = event => {
+        setModalData({
+            ...modalData,
+            attach : event.target.files[0],
+            url : URL.createObjectURL(event.target.files[0])
+        })
+    }
+
+
     return (
         <>
             <Button onClick={onClickAdd} className="w-full">메뉴 추가</Button>
             <List items={menus} clickEvent={onClickUpdate}/>
             <Modal onRequestClose={()=>isOpenModal(false)}>
                 <div>
-                    <img src={menuDefault} style={{height: "300px"}}/>
+                    <img src={modalData.url == null ? menuDefault : modalData.url} style={{height: "300px"}}/>
+                    <input type="file" accept="image/*" id={"menuImg" + modalData.id} hidden={true} onChange={onChangeImage}/>
+                    <Button onClick={()=>document.getElementById("menuImg" + modalData.id)?.click()}>사진 변경</Button>
                 </div>
                 <div>
                     <label htmlFor={"menuName" + modalData.id}>메뉴 이름 : </label>

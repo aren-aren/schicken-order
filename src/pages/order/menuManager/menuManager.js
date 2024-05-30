@@ -4,7 +4,7 @@ export const menuManager = {
     getCategories,
     getMenusInCategory,
     addMenu,
-    updateMenu
+    updateMenu,
 }
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -66,11 +66,22 @@ function getMenusInCategory(id){
 }
 
 function addMenu (data) {
-    return axiosPost("menus", data);
+    return axiosPost("menus", convertFormdata(data));
 }
 
 function updateMenu(data) {
-    return axiosPut("menus/" + data.id, data);
+    return axiosPut("menus/" + data.id, convertFormdata(data));
+}
+
+function convertFormdata(data){
+    const formdata = new FormData();
+
+    formdata.append("id", data.id);
+    formdata.append("menu", data.menu);
+    formdata.append("price", data.price);
+    formdata.append("attach", data.attach);
+
+    return formdata;
 }
 
 function emptyCache(){
