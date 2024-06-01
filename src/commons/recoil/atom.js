@@ -25,6 +25,11 @@ export const modalDataState = atom({
     default : {}
 })
 
+export const franchiseListState = atom({
+    key : "franchiseList",
+    default : []
+})
+
 /* selector */
 
 export const formatedMenusState = selector({

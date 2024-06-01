@@ -4,6 +4,7 @@ import {useRecoilState} from "recoil";
 import {categoryState, formatedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
 import {useEffect} from "react";
 import {menuManager} from "../menuManager/menuManager.js";
+import FranchiseList from "./FranchiseList.jsx";
 
 function OrderPage(){
     const [, setCategory] = useRecoilState(categoryState);
@@ -21,6 +22,7 @@ function OrderPage(){
 
     return (
         <>
+            <FranchiseList/>
             <CategoryList/>
             <MenuList/>
         </>)
