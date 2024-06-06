@@ -5,14 +5,16 @@ import CardTitle from "./CardTitle.jsx";
 Card.propTypes = {
     title : PropTypes.string,
     imgSrc : PropTypes.string,
-    children : PropTypes.node
+    children : PropTypes.node,
+    onClick : PropTypes.func
 }
 
-function Card({title, imgSrc, children}){
+function Card({title, imgSrc, onClick, children}){
 
     return (
         <div
-            className="lg:max-w-sm flex lg:block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+            className="lg:max-w-sm flex lg:block bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
+            onClick={onClick}>
             <CardImg imgSrc={imgSrc}/>
             <div className="p-5">
                 <CardTitle title={title}/>

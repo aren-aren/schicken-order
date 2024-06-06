@@ -1,15 +1,19 @@
 import CategoryList from "./CategoryList.jsx";
 import MenuList from "./MenuList.jsx";
 import {useRecoilState} from "recoil";
-import {categoryState, formatedMenusState, nowCategoryState} from "../../../commons/recoil/atom.js";
+import {
+    categoryState,
+    formatedMenusState,
+    nowCategoryState
+} from "../../../commons/recoil/atom.js";
 import {useEffect} from "react";
 import {menuManager} from "../menuManager/menuManager.js";
-import FranchiseList from "./FranchiseList.jsx";
 
 function OrderPage(){
     const [, setCategory] = useRecoilState(categoryState);
     const [nowCategory] = useRecoilState(nowCategoryState);
     const [, setMenus] = useRecoilState(formatedMenusState);
+
 
     useEffect(()=>{
         menuManager.getCategories().then(data =>{
@@ -19,10 +23,8 @@ function OrderPage(){
             setMenus(data);
         })
     },[])
-
     return (
         <>
-            <FranchiseList/>
             <CategoryList/>
             <MenuList/>
         </>)
