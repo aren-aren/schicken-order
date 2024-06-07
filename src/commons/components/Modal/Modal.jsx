@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import {useRecoilValue} from "recoil";
-import {modalState} from "../../recoil/atom.js";
 import ReactModal from "react-modal";
 import Button from "../Button/Button.jsx";
 
@@ -33,11 +31,11 @@ const customModalStyles = {
 
 Modal.propTypes = {
     children: PropTypes.node,
-    onRequestClose: PropTypes.func
+    onRequestClose: PropTypes.func,
+    isOpen: PropTypes.bool
 }
 
-function Modal({ children, onRequestClose }){
-    const isOpen = useRecoilValue(modalState);
+function Modal({isOpen, children, onRequestClose }){
 
     // 모달을 닫을 때 onRequestClose 함수 호출
     const closeModal = () => {

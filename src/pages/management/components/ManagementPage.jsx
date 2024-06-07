@@ -1,7 +1,7 @@
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState} from "recoil";
 import {menuManager} from "../../order/menuManager/menuManager.js";
-import {useEffect} from "react";
-import {formatedMenusState, formatedModalDataState, modalDataState, modalState} from "../../../commons/recoil/atom.js";
+import {useEffect, useState} from "react";
+import {formatedMenusState} from "../../../commons/recoil/atom.js";
 import List from "../../../commons/components/List/List.jsx";
 import Modal from "../../../commons/components/Modal/Modal.jsx";
 import Button from "../../../commons/components/Button/Button.jsx";
@@ -9,22 +9,42 @@ import menuDefault from "../../../assets/menuDefault.png";
 
 function ManagementPage() {
     const [menus, setMenus] = useRecoilState(formatedMenusState);
-    const [,isOpenModal] = useRecoilState(modalState);
-    const [modalData, setModalData] = useRecoilState(formatedModalDataState);
-    const readiedModalData = useRecoilValue(modalDataState);
+    const [isOpen,isOpenModal] = useState(false);
+    const [modalData, setModalData] = useState({});
 
     useEffect(() => {
         menuManager.getMenusInCategory(0)
             .then(data => setMenus(data));
     }, []);
 
+    function setModalMenu(newValue){
+        setModalData({...newValue, price : formatToNumber(newValue.price)});
+    }
+
+    function moneyFormat(target){
+        const money = target + "";
+        let formatted = [];
+        for (let i = 0; i < money.length; i++) {
+            formatted.push(money.at(money.length - i - 1));
+            if(i%3 === 2 && i !== money.length-1){
+                formatted.push(",");
+            }
+        }
+        return formatted.reverse().join("");
+    }
+
+    function formatToNumber(target){
+        return Number(target.toString().replace(/[^0-9]/g, ""));
+    }
+
+
     const onClickUpdate = item => {
-        setModalData(item);
+        setModalMenu(item);
         isOpenModal(true);
     }
 
     const onClickAdd = () => {
-        setModalData({
+        setModalMenu({
             id : "",
             menu : "",
             price : 0
@@ -33,7 +53,7 @@ function ManagementPage() {
     }
 
     const onChange = (target, value) => {
-        setModalData({
+        setModalMenu({
             ...modalData,
             [target] : value
         })
@@ -43,9 +63,9 @@ function ManagementPage() {
 
         (async ()=>{
             if(modalData.id === ""){
-                return menuManager.addMenu(readiedModalData)
+                return menuManager.addMenu(modalData)
             } else {
-                return menuManager.updateMenu(readiedModalData)
+                return menuManager.updateMenu(modalData)
             }
         })().then(() => {
             isOpenModal(false);
@@ -55,7 +75,7 @@ function ManagementPage() {
     }
 
     const onChangeImage = event => {
-        setModalData({
+        setModalMenu({
             ...modalData,
             attach : event.target.files[0],
             url : URL.createObjectURL(event.target.files[0])
@@ -67,7 +87,7 @@ function ManagementPage() {
         <>
             <Button onClick={onClickAdd} className="w-full">메뉴 추가</Button>
             <List items={menus} clickEvent={onClickUpdate}/>
-            <Modal onRequestClose={()=>isOpenModal(false)}>
+            <Modal isOpen={isOpen} onRequestClose={()=>isOpenModal(false)}>
                 <div>
                     <img src={modalData.url == null ? menuDefault : modalData.url} style={{height: "300px"}}/>
                     <input type="file" accept="image/*" id={"menuImg" + modalData.id} hidden={true} onChange={onChangeImage}/>
@@ -79,7 +99,7 @@ function ManagementPage() {
                 </div>
                 <div>
                     <label htmlFor={"menuPrice" + modalData.id}>메뉴 가격 : </label>
-                    <input id={"menuPrice" + modalData.id} type="text" onChange={event => onChange("price", event.target.value)} value={modalData.price}/>
+                    <input id={"menuPrice" + modalData.id} type="text" onChange={event => onChange("price", event.target.value)} value={moneyFormat(modalData.price)}/>
                 </div>
                 <div>
                     <Button onClick={submitData}>적용하기</Button>

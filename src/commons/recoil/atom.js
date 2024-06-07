@@ -18,18 +18,6 @@ export const menusInCategoryState = atom({
     default : []
 })
 
-/* 모달이 열렸는지 닫혔는지 */
-export const modalState = atom({
-    key : "modal",
-    default : false
-})
-
-/* 모달에 들어갈 데이터 */
-export const modalDataState = atom({
-    key : "modalData",
-    default : {}
-})
-
 /* 프랜차이즈 가맹점의 리스트 */
 export const franchiseListState = atom({
     key : "franchiseList",
@@ -60,17 +48,6 @@ export const formatedMenusState = selector({
     set : ({set}, newValue) => set(menusInCategoryState, newValue.menus)
 })
 
-/* 모달에서 메뉴 가격 변경시 보여줄 때 구분자르 넣고 값을 바꿀때 구분자를 뺀 값으로 넣음 */
-export const formatedModalDataState = selector({
-    key : "formated",
-    get : ({get})=>{
-        const menu = get(modalDataState);
-
-        return {...menu,  price : moneyFormat(menu.price)}
-    },
-    set : ({set}, newValue) => set(modalDataState,{...newValue, price : formatToNumber(newValue.price)})
-})
-
 /* utils */
 function moneyFormat(target){
     const money = target + "";
@@ -82,8 +59,4 @@ function moneyFormat(target){
         }
     }
     return formatted.reverse().join("");
-}
-
-function formatToNumber(target){
-    return Number(target.toString().replace(/[^0-9]/g, ""));
 }

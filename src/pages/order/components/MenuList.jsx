@@ -2,8 +2,6 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import Card from "../../../commons/components/Card/Card.jsx";
 import {
     formatedMenusState,
-    modalDataState,
-    modalState,
     selectedFranchiseState,
     userInformationState
 } from "../../../commons/recoil/atom.js";
@@ -14,15 +12,13 @@ import Button from "../../../commons/components/Button/Button.jsx";
 function MenuList() {
 
     const menusInCategory = useRecoilValue(formatedMenusState);
-    const [,isModalOpen] = useRecoilState(modalState);
-    const [modalData,setModalData] = useRecoilState(modalDataState);
     const [userInformation, setUserInformation] = useRecoilState(userInformationState);
     const [selectedFranchise, selectFranchise] = useRecoilState(selectedFranchiseState);
 
-    const onCardClick = menu=>{
-        setModalData(menu);
-        isModalOpen(true);
-    }
+    // const onCardClick = menu=>{
+    //     setModalData(menu);
+    //     isModalOpen(true);
+    // }
 
     const onOrderButtonClick = menuId => {
         /* 로그인 시키기 */
@@ -57,12 +53,12 @@ function MenuList() {
                     )
                 )}
             </section>
-            <Modal>
-                <img src={modalData.url == null ? menuDefault : modalData.url} style={{height: "300px"}}/>
-                <div>{modalData.menu}</div>
-                <div>{modalData.price}</div>
-                <Button onClick={()=>onOrderButtonClick(modalData.id)}>주문하기</Button>
-            </Modal>
+            {/*<Modal>*/}
+            {/*    <img src={modalData.url == null ? menuDefault : modalData.url} style={{height: "300px"}}/>*/}
+            {/*    <div>{modalData.menu}</div>*/}
+            {/*    <div>{modalData.price}</div>*/}
+            {/*    <Button onClick={()=>onOrderButtonClick(modalData.id)}>주문하기</Button>*/}
+            {/*</Modal>*/}
         </>
     )
 }
