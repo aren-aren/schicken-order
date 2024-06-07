@@ -63,11 +63,12 @@ function LoginModalElement({onFinish}){
         checkOTP(userMail, number)
             .then(data => {
                 console.log(data);
-                if(data?.mail != null){
+                if(data.result === "success"){
                     console.log("성?공");
-                    onFinish(data);
+                    onFinish(data.user);
                 } else {
                     console.log("실?패");
+                    console.log(data.result);
                 }
             })
     }
