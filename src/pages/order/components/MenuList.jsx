@@ -8,6 +8,8 @@ import {
 import menuDefault from "../../../assets/menuDefault.png";
 import Modal from "../../../commons/components/Modal/Modal.jsx";
 import Button from "../../../commons/components/Button/Button.jsx";
+import {useState} from "react";
+import LoginModalElement from "./LoginModalElement.jsx";
 
 function MenuList() {
 
@@ -15,16 +17,29 @@ function MenuList() {
     const [userInformation, setUserInformation] = useRecoilState(userInformationState);
     const [selectedFranchise, selectFranchise] = useRecoilState(selectedFranchiseState);
 
-    // const onCardClick = menu=>{
-    //     setModalData(menu);
-    //     isModalOpen(true);
-    // }
+    const [menuModalOpenState, setMenuModalOpenState] = useState(false);
+    const [menuModalData, setMenuModalData] = useState({});
+
+    const [infoModalOpenState, setInfoModalOpenState] = useState(false);
+    const [infoModalState, setInfoModalState] = useState(<></>);
+
+    const onCardClick = menu=>{
+        setMenuModalData(menu);
+        setMenuModalOpenState(true);
+    }
+
+    const LoginEnd = (data, menuId) =>{
+        setUserInformation(data);
+        onOrderButtonClick(menuId);
+    }
 
     const onOrderButtonClick = menuId => {
         /* 로그인 시키기 */
         if(userInformation == null){
             console.log("login");
-            setUserInformation("로그인 후 정보 넣기");
+            setInfoModalState(<LoginModalElement onFinish={data=>LoginEnd(data, menuId)}/>);
+            setInfoModalOpenState(true);
+            return;
         }
 
         /* 배달하기위한 정보 입력 */
@@ -53,12 +68,15 @@ function MenuList() {
                     )
                 )}
             </section>
-            {/*<Modal>*/}
-            {/*    <img src={modalData.url == null ? menuDefault : modalData.url} style={{height: "300px"}}/>*/}
-            {/*    <div>{modalData.menu}</div>*/}
-            {/*    <div>{modalData.price}</div>*/}
-            {/*    <Button onClick={()=>onOrderButtonClick(modalData.id)}>주문하기</Button>*/}
-            {/*</Modal>*/}
+            <Modal isOpen={menuModalOpenState} onRequestClose={()=> setMenuModalOpenState(false)}>
+                <img src={menuModalData.url == null ? menuDefault : menuModalData.url} style={{height: "300px"}}/>
+                <div>{menuModalData.menu}</div>
+                <div>{menuModalData.price}</div>
+                <Button onClick={()=>onOrderButtonClick(menuModalData.id)}>주문하기</Button>
+            </Modal>
+            <Modal isOpen={infoModalOpenState} onRequestClose={()=>setInfoModalOpenState(false)}>
+                {infoModalState}
+            </Modal>
         </>
     )
 }
